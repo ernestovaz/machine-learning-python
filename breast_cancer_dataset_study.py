@@ -53,9 +53,19 @@ def KNNInstances_from_file(
     return training_instances, validation_instances
 
 
-training, validation = KNNInstances_from_file('breast_cancer_data.csv', 0.2, False)
-model = KNNModel(training)
-print(model.calculate_accuracy(validation, 11, euclidean_distance))
-training, validation = KNNInstances_from_file('breast_cancer_data.csv', 0.2, True)
-model = KNNModel(training)
-print(model.calculate_accuracy(validation, 11, euclidean_distance))
+def main():
+    # usage example, compare with and without normalization
+    training, validation = KNNInstances_from_file(
+        'breast_cancer_data.csv', 0.2, False
+    )
+    model = KNNModel(training)
+    print(model.calculate_accuracy(validation, 11, euclidean_distance))
+    training, validation = KNNInstances_from_file(
+        'breast_cancer_data.csv', 0.2, True
+    )
+    model = KNNModel(training)
+    print(model.calculate_accuracy(validation, 11, euclidean_distance))
+
+
+if __name__ == "__main__":
+    main()
