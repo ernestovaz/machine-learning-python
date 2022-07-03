@@ -8,7 +8,7 @@ from knn import KNNInstance, KNNModel
 from distance_algorithms import euclidean_distance
 
 
-def normalizeDataframe(dataframe):
+def normalize_dataframe(dataframe):
     for column in dataframe.columns[1:-1]:
         dataframe[column] = np.divide(
             dataframe[column].values,
@@ -24,7 +24,7 @@ def KNNInstances_from_file(
 
     dataframe = pd.read_csv(file_path)
     if(normalize):
-        normalizeDataframe(dataframe)
+        normalize_dataframe(dataframe)
 
     group_indexes = [
         group.index.values.tolist() for group in [
@@ -55,11 +55,13 @@ def KNNInstances_from_file(
 
 def main():
     # usage example, compare with and without normalization
+
     training, validation = KNNInstances_from_file(
         'breast_cancer_data.csv', 0.2, False
     )
     model = KNNModel(training)
     print(model.calculate_accuracy(validation, 11, euclidean_distance))
+
     training, validation = KNNInstances_from_file(
         'breast_cancer_data.csv', 0.2, True
     )
