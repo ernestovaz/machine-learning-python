@@ -30,6 +30,20 @@ class KNNModel():
         predicted_label: float = mode(closest_labels)
         return predicted_label
 
+    def calculate_accuracy(
+        self,
+        validation_instances: List[KNNInstance],
+        k: int,
+        distance_function: Callable[[List[float], List[float]], float]
+    ) -> float:
+
+        correct_predictions: List[int] = [
+            self.predict(instance, k, distance_function) == instance.label
+            for instance in validation_instances
+        ]
+
+        return sum(correct_predictions) / len(validation_instances)
+
 
 def main():
     # usage example
